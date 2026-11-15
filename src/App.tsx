@@ -86,7 +86,7 @@ function App() {
 
   const saveProject = () => {
     const item: Project = {
-      id: "MOV-" + String(Math.max(25, ...projects.map((p) => Number(p.id.split("-")[1]) || 0) + 1)).padStart(3, "0"),
+      id: "MOV-" + String(Math.max(25, ...projects.map((p) => Number(p.id.split("-")[1]) || 0)) + 1).padStart(3, "0"),
       name: form.name, client: form.client || "Cliente não informado",
       location: form.location, category: category || "mobile", equipment: form.equipment,
       load: form.load, weight: Number(form.weight).toLocaleString("pt-BR"),
@@ -234,7 +234,7 @@ function Dashboard({ projects, onCreate, onViewAll, onOpen }: { projects: Projec
         <div className="project-table"><div className="table-head"><span>OPERAÇÃO</span><span>EQUIPAMENTO</span><span>STATUS</span><span /></div>
           {projects.slice(0,4).map((p) => <button className="project-row" key={p.id} onClick={() => onOpen(p)}><div className="project-name"><span className={"project-icon " + p.category}>{p.category === "mobile" ? <Truck size={16} /> : <Crane size={16} />}</span><span><strong>{p.name}</strong><small>{p.id} <i /> {p.client}</small></span></div><span className="equipment-cell">{p.equipment}</span><span><Status status={p.status} /></span><ChevronRight size={16} className="row-chevron" /></button>)}
           {projects.length === 0 && <div className="empty-state"><FolderKanban size={28} /><strong>Nenhum plano cadastrado</strong><span>Crie seu primeiro plano para começar.</span></div>}
-        </div><button className="table-footer" onClick={onViewAll}>Acessar todos os planos <ArrowRight size={14} /></button>
+        </div><div className="demo-footnote">Os registros iniciais são exemplos demonstrativos e podem ser substituídos pelos seus projetos.</div><button className="table-footer" onClick={onViewAll}>Acessar todos os planos <ArrowRight size={14} /></button>
       </section>
       <section className="surface quick-panel"><div className="surface-heading"><div><h3>Acesso rápido</h3><p>Comece por uma categoria</p></div><SlidersHorizontal size={17} className="muted-icon" /></div>
         <button className="quick-item" onClick={onCreate}><span className="quick-icon mobile"><Truck size={19} /></span><span><strong>Guindastes móveis</strong><small>Telescópico, Munck e esteiras</small></span><ArrowRight size={15} /></button>
