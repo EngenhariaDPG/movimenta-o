@@ -73,7 +73,7 @@ function App() {
   const update = (key: keyof FormData, value: string) => setForm((old) => ({ ...old, [key]: value }));
   const openWizard = () => {
     setForm(initialForm);
-    setCategory(null);
+    setCategory(presetCategory ?? null);
     setStep(0);
     setShowWizard(true);
   };
@@ -217,10 +217,11 @@ function Field({ label, required, wide, children }: { label: string; required?: 
   return <label className={"field " + (wide ? "field-wide" : "")}><span>{label}{required && <b> *</b>}</span>{children}</label>;
 }
 
-function Dashboard({ projects, onCreate, onViewAll, onOpen }: { projects: Project[]; onCreate: () => void; onViewAll: () => void; onOpen: (p: Project) => void }) {
+function Dashboard({ projects, onCreate, onViewAll, onOpen }: { projects: Project[]; onCreate: (presetCategory?: Category) => void; onViewAll: () => void; onOpen: (p: Project) => void }) {
   const inProgress = projects.filter((p) => p.status !== "Concluído").length;
+  const today = new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }).format(new Date()).toUpperCase();
   return <div className="page">
-    <div className="page-heading"><div><div className="eyebrow">SÁBADO, 15 DE NOVEMBRO DE 2026</div><h1>Visão geral</h1><p>Bem-vindo ao seu espaço de planejamento de movimentação.</p></div><button className="btn-primary create-button" onClick={onCreate}><Plus size={17} /> Novo plano</button></div>
+    <div className="page-heading"><div><div className="eyebrow">{today}</div><h1>Visão geral</h1><p>Bem-vindo ao seu espaço de planejamento de movimentação.</p></div><button className="btn-primary create-button" onClick={onCreate}><Plus size={17} /> Novo plano</button></div>
     <section className="welcome-banner"><div className="welcome-copy"><span className="banner-eyebrow">MOVIMENTAÇÃO COM INTELIGÊNCIA</span><h2>Engenharia organizada.<br /><em>Operações planejadas.</em></h2><p>Centralize dados, equipamentos e documentação técnica das suas operações de içamento.</p><button onClick={onCreate}>Começar um plano <ArrowRight size={15} /></button></div><div className="banner-graphic"><div className="graphic-circle circle-one" /><div className="graphic-circle circle-two" /><div className="graphic-line line-one" /><div className="graphic-line line-two" /><Crane className="banner-crane" size={168} strokeWidth={0.8} /><div className="graphic-tag"><span className="graphic-tag-dot" /> WORKSPACE ONLINE</div></div></section>
     <div className="section-title-row"><div><h2>Seu workspace</h2><p>Acompanhe o andamento dos seus projetos.</p></div><button className="text-button" onClick={onViewAll}>Ver todos os planos <ArrowRight size={14} /></button></div>
     <div className="stats-grid">
@@ -237,8 +238,8 @@ function Dashboard({ projects, onCreate, onViewAll, onOpen }: { projects: Projec
         </div><div className="demo-footnote">Os registros iniciais são exemplos demonstrativos e podem ser substituídos pelos seus projetos.</div><button className="table-footer" onClick={onViewAll}>Acessar todos os planos <ArrowRight size={14} /></button>
       </section>
       <section className="surface quick-panel"><div className="surface-heading"><div><h3>Acesso rápido</h3><p>Comece por uma categoria</p></div><SlidersHorizontal size={17} className="muted-icon" /></div>
-        <button className="quick-item" onClick={onCreate}><span className="quick-icon mobile"><Truck size={19} /></span><span><strong>Guindastes móveis</strong><small>Telescópico, Munck e esteiras</small></span><ArrowRight size={15} /></button>
-        <button className="quick-item" onClick={onCreate}><span className="quick-icon fixed"><Crane size={19} /></span><span><strong>Guindastes fixos</strong><small>Ponte rolante, pórtico e coluna</small></span><ArrowRight size={15} /></button>
+        <button className="quick-item" onClick={() => onCreate("mobile")}><span className="quick-icon mobile"><Truck size={19} /></span><span><strong>Guindastes móveis</strong><small>Telescópico, Munck e esteiras</small></span><ArrowRight size={15} /></button>
+        <button className="quick-item" onClick={() => onCreate("fixed")}><span className="quick-icon fixed"><Crane size={19} /></span><span><strong>Guindastes fixos</strong><small>Ponte rolante, pórtico e coluna</small></span><ArrowRight size={15} /></button>
         <div className="quick-tip"><div><BookOpen size={16} /></div><p><strong>Biblioteca técnica</strong><br />Organize manuais, tabelas de carga e documentos dos equipamentos.</p></div>
       </section>
     </div>
