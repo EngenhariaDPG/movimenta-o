@@ -71,7 +71,7 @@ function App() {
   }, [projects]);
 
   const update = (key: keyof FormData, value: string) => setForm((old) => ({ ...old, [key]: value }));
-  const openWizard = () => {
+  const openWizard = (presetCategory?: Category) => {
     setForm(initialForm);
     setCategory(presetCategory ?? null);
     setStep(0);
