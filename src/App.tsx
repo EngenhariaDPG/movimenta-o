@@ -52,8 +52,8 @@ function App() {
 
   const canContinue = useMemo(() => {
     if (step === 0) return category !== null;
-    if (step === 1) return project.title.trim() && project.location.trim() && project.equipmentType;
-    if (step === 2) return project.loadName.trim() && Number(project.loadWeight) > 0;
+    if (step === 1) return Boolean(project.title.trim() && project.location.trim() && project.equipmentType);
+    if (step === 2) return Boolean(project.loadName.trim() && Number(project.loadWeight) > 0);
     if (step === 3) return true;
     return true;
   }, [step, category, project]);
