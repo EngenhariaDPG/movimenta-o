@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Activity, ArrowDownRight, ArrowLeft, ArrowRight, Bell, BookOpen, Check,
   ChevronDown, ChevronRight, CircleHelp, ClipboardCheck, Clock3, Command,
-  Crane, Download, FilePlus2, FileText, FolderKanban, Gauge, HardHat,
+  Wrench, Download, FilePlus2, FileText, FolderKanban, Gauge, HardHat,
   LayoutDashboard, LifeBuoy, MapPin, Menu, MoreHorizontal, Plus, Search,
   Settings2, ShieldCheck, SlidersHorizontal, Truck, Weight, Wrench, X
 } from "lucide-react";
@@ -108,7 +108,7 @@ function App() {
     <div className="app">
       <aside className={"sidebar " + (mobileMenu ? "sidebar-open" : "")}>
         <div className="brand">
-          <div className="brand-symbol"><Crane size={22} strokeWidth={1.8} /></div>
+          <div className="brand-symbol"><Wrench size={22} strokeWidth={1.8} /></div>
           <div className="brand-name">movimenta<span>.</span><small>ENGINEERING WORKSPACE</small></div>
           <button className="mobile-close" onClick={() => setMobileMenu(false)}><X size={18} /></button>
         </div>
@@ -121,7 +121,7 @@ function App() {
         <nav className="main-nav">
           <button className={view === "dashboard" ? "active" : ""} onClick={() => nav("dashboard")}><LayoutDashboard size={17} /> Visão geral</button>
           <button className={view === "projects" ? "active" : ""} onClick={() => nav("projects")}><FolderKanban size={17} /> Meus planos <span className="nav-count">{projects.length}</span></button>
-          <button className={view === "equipment" ? "active" : ""} onClick={() => nav("equipment")}><Crane size={17} /> Equipamentos</button>
+          <button className={view === "equipment" ? "active" : ""} onClick={() => nav("equipment")}><Wrench size={17} /> Equipamentos</button>
         </nav>
         <div className="nav-label second-label">GESTÃO</div>
         <nav className="main-nav">
@@ -158,7 +158,7 @@ function App() {
       {showWizard && (
         <div className="modal-backdrop" role="presentation">
           <div className="wizard-modal" role="dialog" aria-modal="true" aria-label="Criar novo plano">
-            <div className="wizard-top"><div className="wizard-brand"><span className="mini-brand"><Crane size={17} /></span><div><strong>Novo plano de movimentação</strong><small>Configure os dados da operação</small></div></div><button className="icon-button" onClick={closeWizard}><X size={18} /></button></div>
+            <div className="wizard-top"><div className="wizard-brand"><span className="mini-brand"><Wrench size={17} /></span><div><strong>Novo plano de movimentação</strong><small>Configure os dados da operação</small></div></div><button className="icon-button" onClick={closeWizard}><X size={18} /></button></div>
             <div className="wizard-progress">{["Modalidade", "Projeto", "Carga", "Operação", "Revisão"].map((label, i) => <div key={label} className={"progress-step " + (i === step ? "current" : i < step ? "complete" : "")}><span>{i < step ? <Check size={12} /> : i + 1}</span><small>{label}</small></div>)}</div>
             <div className="wizard-body">
               <div className="wizard-heading"><div className="eyebrow">ETAPA 0{step + 1} / 05</div><h2>{["Qual equipamento será utilizado?", "Identificação do projeto", "Caracterização da carga", "Condições da operação", "Revise as informações"][step]}</h2><p>{["Escolha a categoria principal para personalizar as próximas etapas.", "Identifique a operação e selecione o equipamento de movimentação.", "Informe as características conhecidas da carga.", "Descreva as condições de execução e os acessórios previstos.", "Confira os dados cadastrados antes de criar o plano."][step]}</p></div>
@@ -168,7 +168,7 @@ function App() {
                   <div className="choice-text"><span className="choice-tag">CATEGORIA 01</span><h3>Guindastes móveis</h3><p>Equipamentos posicionados no local da operação, com configuração variável de lança e apoio.</p><div className="choice-types">Telescópico <i /> Munck <i /> Esteiras</div></div><span className="choice-check">{category === "mobile" && <Check size={15} />}</span>
                 </button>
                 <button className={"choice-card " + (category === "fixed" ? "chosen" : "")} onClick={() => { setCategory("fixed"); update("equipment", ""); }}>
-                  <div className="choice-image fixed-choice"><Crane size={44} strokeWidth={1.4} /><span className="image-caption">FIXED LIFTING</span></div>
+                  <div className="choice-image fixed-choice"><Wrench size={44} strokeWidth={1.4} /><span className="image-caption">FIXED LIFTING</span></div>
                   <div className="choice-text"><span className="choice-tag">CATEGORIA 02</span><h3>Guindastes fixos</h3><p>Equipamentos instalados em posição definida, com trajetória de movimentação determinada.</p><div className="choice-types">Ponte rolante <i /> Pórtico <i /> Coluna / parede</div></div><span className="choice-check">{category === "fixed" && <Check size={15} />}</span>
                 </button>
               </div>}
@@ -222,7 +222,7 @@ function Dashboard({ projects, onCreate, onViewAll, onOpen }: { projects: Projec
   const today = new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }).format(new Date()).toUpperCase();
   return <div className="page">
     <div className="page-heading"><div><div className="eyebrow">{today}</div><h1>Visão geral</h1><p>Bem-vindo ao seu espaço de planejamento de movimentação.</p></div><button className="btn-primary create-button" onClick={() => onCreate()}><Plus size={17} /> Novo plano</button></div>
-    <section className="welcome-banner"><div className="welcome-copy"><span className="banner-eyebrow">MOVIMENTAÇÃO COM INTELIGÊNCIA</span><h2>Engenharia organizada.<br /><em>Operações planejadas.</em></h2><p>Centralize dados, equipamentos e documentação técnica das suas operações de içamento.</p><button onClick={onCreate}>Começar um plano <ArrowRight size={15} /></button></div><div className="banner-graphic"><div className="graphic-circle circle-one" /><div className="graphic-circle circle-two" /><div className="graphic-line line-one" /><div className="graphic-line line-two" /><Crane className="banner-crane" size={168} strokeWidth={0.8} /><div className="graphic-tag"><span className="graphic-tag-dot" /> WORKSPACE ONLINE</div></div></section>
+    <section className="welcome-banner"><div className="welcome-copy"><span className="banner-eyebrow">MOVIMENTAÇÃO COM INTELIGÊNCIA</span><h2>Engenharia organizada.<br /><em>Operações planejadas.</em></h2><p>Centralize dados, equipamentos e documentação técnica das suas operações de içamento.</p><button onClick={() => onCreate()}>Começar um plano <ArrowRight size={15} /></button></div><div className="banner-graphic"><div className="graphic-circle circle-one" /><div className="graphic-circle circle-two" /><div className="graphic-line line-one" /><div className="graphic-line line-two" /><Wrench className="banner-crane" size={168} strokeWidth={0.8} /><div className="graphic-tag"><span className="graphic-tag-dot" /> WORKSPACE ONLINE</div></div></section>
     <div className="section-title-row"><div><h2>Seu workspace</h2><p>Acompanhe o andamento dos seus projetos.</p></div><button className="text-button" onClick={onViewAll}>Ver todos os planos <ArrowRight size={14} /></button></div>
     <div className="stats-grid">
       <Stat icon={<FolderKanban size={18} />} label="Planos cadastrados" value={String(projects.length).padStart(2,"0")} change="Total no workspace" tone="blue" />
@@ -233,13 +233,13 @@ function Dashboard({ projects, onCreate, onViewAll, onOpen }: { projects: Projec
     <div className="dashboard-columns">
       <section className="surface recent-panel"><div className="surface-heading"><div><h3>Planos recentes</h3><p>Últimas operações registradas</p></div><button className="more-button" onClick={onViewAll}><MoreHorizontal size={19} /></button></div>
         <div className="project-table"><div className="table-head"><span>OPERAÇÃO</span><span>EQUIPAMENTO</span><span>STATUS</span><span /></div>
-          {projects.slice(0,4).map((p) => <button className="project-row" key={p.id} onClick={() => onOpen(p)}><div className="project-name"><span className={"project-icon " + p.category}>{p.category === "mobile" ? <Truck size={16} /> : <Crane size={16} />}</span><span><strong>{p.name}</strong><small>{p.id} <i /> {p.client}</small></span></div><span className="equipment-cell">{p.equipment}</span><span><Status status={p.status} /></span><ChevronRight size={16} className="row-chevron" /></button>)}
+          {projects.slice(0,4).map((p) => <button className="project-row" key={p.id} onClick={() => onOpen(p)}><div className="project-name"><span className={"project-icon " + p.category}>{p.category === "mobile" ? <Truck size={16} /> : <Wrench size={16} />}</span><span><strong>{p.name}</strong><small>{p.id} <i /> {p.client}</small></span></div><span className="equipment-cell">{p.equipment}</span><span><Status status={p.status} /></span><ChevronRight size={16} className="row-chevron" /></button>)}
           {projects.length === 0 && <div className="empty-state"><FolderKanban size={28} /><strong>Nenhum plano cadastrado</strong><span>Crie seu primeiro plano para começar.</span></div>}
         </div><div className="demo-footnote">Os registros iniciais são exemplos demonstrativos e podem ser substituídos pelos seus projetos.</div><button className="table-footer" onClick={onViewAll}>Acessar todos os planos <ArrowRight size={14} /></button>
       </section>
       <section className="surface quick-panel"><div className="surface-heading"><div><h3>Acesso rápido</h3><p>Comece por uma categoria</p></div><SlidersHorizontal size={17} className="muted-icon" /></div>
         <button className="quick-item" onClick={() => onCreate("mobile")}><span className="quick-icon mobile"><Truck size={19} /></span><span><strong>Guindastes móveis</strong><small>Telescópico, Munck e esteiras</small></span><ArrowRight size={15} /></button>
-        <button className="quick-item" onClick={() => onCreate("fixed")}><span className="quick-icon fixed"><Crane size={19} /></span><span><strong>Guindastes fixos</strong><small>Ponte rolante, pórtico e coluna</small></span><ArrowRight size={15} /></button>
+        <button className="quick-item" onClick={() => onCreate("fixed")}><span className="quick-icon fixed"><Wrench size={19} /></span><span><strong>Guindastes fixos</strong><small>Ponte rolante, pórtico e coluna</small></span><ArrowRight size={15} /></button>
         <div className="quick-tip"><div><BookOpen size={16} /></div><p><strong>Biblioteca técnica</strong><br />Organize manuais, tabelas de carga e documentos dos equipamentos.</p></div>
       </section>
     </div>
@@ -260,7 +260,7 @@ function Projects({ projects, onCreate, onOpen, search }: { projects: Project[];
     <div className="page-heading"><div><div className="eyebrow">GESTÃO DE OPERAÇÕES</div><h1>Meus planos</h1><p>Gerencie seus projetos de movimentação de cargas.</p></div><button className="btn-primary create-button" onClick={onCreate}><Plus size={17} /> Novo plano</button></div>
     <div className="list-toolbar"><div className="toolbar-title"><FolderKanban size={18} /><strong>Todos os planos</strong><span>{projects.length} registros</span></div><div className="toolbar-filter"><SlidersHorizontal size={15} /> Todos os status <ChevronDown size={14} /></div></div>
     <div className="surface projects-list"><div className="list-head"><span>IDENTIFICAÇÃO</span><span>MODALIDADE</span><span>EQUIPAMENTO</span><span>CARGA</span><span>STATUS</span><span /></div>
-      {projects.map((p) => <button className="list-row" key={p.id} onClick={() => onOpen(p)}><div className="list-project"><span className={"project-icon " + p.category}>{p.category === "mobile" ? <Truck size={17} /> : <Crane size={17} />}</span><span><strong>{p.name}</strong><small>{p.id} · {p.client}</small></span></div><span className="modality-text">{p.category === "mobile" ? "Guindaste móvel" : "Guindaste fixo"}</span><span>{p.equipment}</span><span>{p.load}<small className="sub-value">{p.weight} kg</small></span><Status status={p.status} /><ChevronRight size={16} className="row-chevron" /></button>)}
+      {projects.map((p) => <button className="list-row" key={p.id} onClick={() => onOpen(p)}><div className="list-project"><span className={"project-icon " + p.category}>{p.category === "mobile" ? <Truck size={17} /> : <Wrench size={17} />}</span><span><strong>{p.name}</strong><small>{p.id} · {p.client}</small></span></div><span className="modality-text">{p.category === "mobile" ? "Guindaste móvel" : "Guindaste fixo"}</span><span>{p.equipment}</span><span>{p.load}<small className="sub-value">{p.weight} kg</small></span><Status status={p.status} /><ChevronRight size={16} className="row-chevron" /></button>)}
       {projects.length === 0 && <div className="empty-state"><Search size={27} /><strong>{search ? "Nenhum resultado encontrado" : "Seu workspace está vazio"}</strong><span>{search ? "Tente buscar por outro termo." : "Crie seu primeiro plano de movimentação."}</span>{!search && <button className="btn-primary" onClick={onCreate}>Criar primeiro plano</button>}</div>}
     </div>
   </div>;
@@ -277,7 +277,7 @@ function Equipment() {
 }
 
 function EquipmentCard({ name, detail, icon }: { name: string; detail: string; icon: string }) {
-  return <div className="equipment-card"><div className="equipment-card-icon">{icon === "truck" ? <Truck size={21} /> : icon === "wrench" ? <Wrench size={21} /> : <Crane size={21} />}</div><div><strong>{name}</strong><span>{detail}</span></div><span className="equipment-card-arrow"><ChevronRight size={16} /></span></div>;
+  return <div className="equipment-card"><div className="equipment-card-icon">{icon === "truck" ? <Truck size={21} /> : icon === "wrench" ? <Wrench size={21} /> : <Wrench size={21} />}</div><div><strong>{name}</strong><span>{detail}</span></div><span className="equipment-card-arrow"><ChevronRight size={16} /></span></div>;
 }
 
 function ReviewGroup({ title, children }: { title: string; children: React.ReactNode }) {
